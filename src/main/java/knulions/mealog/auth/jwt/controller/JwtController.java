@@ -32,6 +32,7 @@ public class JwtController {
             String accessToken = jwtService.createAccessToken(member.getEmail(), member.getRole().name());
 
             response.addHeader("Authorization", accessToken);
+            //키 or 몸무게 저장되어
             response.sendRedirect("http://localhost:3000/mainpage");
         }
 

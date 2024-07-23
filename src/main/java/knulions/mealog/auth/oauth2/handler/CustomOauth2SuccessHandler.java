@@ -34,7 +34,7 @@ public class CustomOauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
         String role = authorities.iterator().next().getAuthority();
 
         String refreshToken =  jwtService.createRefreshToken();
-       memberService.saveRefresh(email, refreshToken);
+        memberService.saveRefresh(email, refreshToken);
 
         response.addCookie(jwtService.createCookie("Authorization-refresh", refreshToken));
         response.sendRedirect("http://localhost:3000/reissue");
