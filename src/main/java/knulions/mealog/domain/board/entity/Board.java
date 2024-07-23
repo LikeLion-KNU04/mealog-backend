@@ -3,6 +3,7 @@ package knulions.mealog.domain.board.entity;
 import jakarta.persistence.*;
 import knulions.mealog.domain.Image.entity.Image;
 import knulions.mealog.domain.board.dto.request.BoardUpdateRequest;
+import knulions.mealog.domain.comment.entity.Comment;
 import knulions.mealog.domain.member.entity.Member;
 import knulions.mealog.global.entity.BaseTimeEntity;
 import lombok.Builder;
@@ -33,8 +34,8 @@ public class Board extends BaseTimeEntity {
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-//    private List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
     @Builder
     public Board(Member member, String content){

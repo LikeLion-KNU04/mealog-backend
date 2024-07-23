@@ -1,4 +1,8 @@
 package knulions.mealog.domain.comment.dto.request;
 
-public class CommentSaveRequest {
+
+import lombok.Builder;
+
+@Builder
+public record CommentSaveRequest(String content) {
 }
