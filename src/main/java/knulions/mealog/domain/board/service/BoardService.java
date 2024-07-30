@@ -51,7 +51,7 @@ public class BoardService {
                 .content(boardSaveRequest.content())
                 .build();
 
-        imageService.uploadImages(board, imageList);
+        imageService.uploadBoardImages(board, imageList);
 
         boardRepository.save(board);
 
@@ -85,7 +85,7 @@ public class BoardService {
         Board board = boardRepository.findById(id)
                 .orElseThrow();
 
-        List<Image> imageList =  imageService.getImageList(Optional.ofNullable(board));
+        List<Image> imageList =  imageService.getBoardImageList(board);
 
         List<String> imageUrls = new ArrayList<>();
 
@@ -143,7 +143,7 @@ public class BoardService {
 
         imageRepository.deleteAllByBoardId(boardId);
 
-        imageService.uploadImages(board, newImageList);
+        imageService.uploadBoardImages(board, newImageList);
 
         board.updateBoard(boardUpdateRequest);
 

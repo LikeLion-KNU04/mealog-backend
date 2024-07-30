@@ -2,6 +2,7 @@ package knulions.mealog.domain.Image.repository;
 
 import knulions.mealog.domain.Image.entity.Image;
 import knulions.mealog.domain.board.entity.Board;
+import knulions.mealog.domain.market.entity.Market;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +18,9 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 
     List<Image> findAllByBoardId(Long boardId);
     List<Image> findByBoard(Optional<Board> board);
-    List<Image> findByBoardId(Long id);
+
+    List<Image> findAllByMarketId(Long marketId);
+    List<Image> findByMarket(Optional<Market> market);
 
     void deleteAllByBoardId(Long id);
 }
