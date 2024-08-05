@@ -68,8 +68,7 @@ public class SecurityConfig {
                                 .requestMatchers(new AntPathRequestMatcher("/googleLogin")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/member/signup")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/email/**")).permitAll()
-                                //.requestMatchers(new AntPathRequestMatcher("/program/{programId}/review/view/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/ws")).permitAll()
+
 
                                 .anyRequest().authenticated()
                         )

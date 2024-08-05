@@ -8,6 +8,7 @@ import knulions.mealog.domain.board.dto.response.BoardAllReadResponse;
 import knulions.mealog.domain.board.dto.response.BoardIdReadResponse;
 import knulions.mealog.domain.board.entity.Board;
 import knulions.mealog.domain.market.dto.request.MarketSaveRequest;
+import knulions.mealog.domain.market.dto.request.MarketUpdateRequest;
 import knulions.mealog.domain.market.dto.response.MarketAllReadResponse;
 import knulions.mealog.domain.market.dto.response.MarketIdReadResponse;
 import knulions.mealog.domain.market.entity.Market;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.yaml.snakeyaml.error.Mark;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -124,6 +126,44 @@ public class MarketService{
             log.info("findAllMyPrograms 오류,{}",e);
         }
         return null;
+    }
+
+
+    @Transactional
+    public Long updateMarket(MarketUpdateRequest marketUpdateRequest, MultipartFile[] newImageList, Long marketId, String email)throws IOException{
+
+        Market market = marketRepository.findById(marketId)
+                .orElseThrow(() -> new NoSuchElementException("market 이 없습니다"));
+
+        //Member member = memberRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("member 이 없습니다"));
+        if(!market.getMember().getEmail().equals(email)){
+            throw new AccessDeniedException("market 을 수정할 권한이 없습니다.");
+        }
+
+        imageRepository.deleteAllByMarketId(marketId);
+
+        imageService.uploadMarketImages(market, newImageList);
+
+        market.updateMarket(marketUpdateRequest);
+
+        marketRepository.save(market);
+
+        return market.getId();
+    }
+
+
+    @Transactional
+    public void deleteMarket(Long marketId,String email) throws AccessDeniedException {
+
+        Market market = marketRepository.findById(marketId)
+                .orElseThrow(() -> new NoSuchElementException("market이 없습니다."));
+
+        if(!market.getMember().getEmail().equals(email)){
+            throw new AccessDeniedException("program을 삭제할 권한이 없습니다.");
+        }
+
+
+        marketRepository.delete(market);
     }
 
 }

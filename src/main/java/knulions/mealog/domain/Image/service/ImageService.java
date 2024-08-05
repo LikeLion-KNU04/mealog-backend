@@ -30,7 +30,7 @@ public class ImageService {
 
     private final Storage storage;
 
-    private String bucketName = "matching_service";
+    private String bucketName = "mealog";
     private final ImageRepository imageRepository;
 
     public void uploadBoardImages(Board board, MultipartFile[] multipartFiles) throws IOException {

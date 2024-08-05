@@ -22,5 +22,6 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     List<Image> findAllByMarketId(Long marketId);
     List<Image> findByMarket(Optional<Market> market);
 
+    void deleteAllByMarketId(Long id);
     void deleteAllByBoardId(Long id);
 }

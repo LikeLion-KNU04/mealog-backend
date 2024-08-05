@@ -2,6 +2,7 @@ package knulions.mealog.domain.market.entity;
 
 import jakarta.persistence.*;
 import knulions.mealog.domain.Image.entity.Image;
+import knulions.mealog.domain.market.dto.request.MarketUpdateRequest;
 import knulions.mealog.domain.member.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,7 +45,11 @@ public class Market {
         this.content = content;
     }
 
-
+    public void updateMarket(MarketUpdateRequest marketUpdateRequest){
+        this.title = marketUpdateRequest.title();
+        this.price = marketUpdateRequest.price();
+        this.content = marketUpdateRequest.content();
+    }
 
 
 }

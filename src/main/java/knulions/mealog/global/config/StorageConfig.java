@@ -16,9 +16,9 @@ public class StorageConfig {
     @Bean
     public Storage storage() throws IOException {
 
-        ClassPathResource resource = new ClassPathResource("webpro-425010-67b4bf8c116d.json");
+        ClassPathResource resource = new ClassPathResource("glass-sight-427116-t8-aa2e289fd170.json");
         GoogleCredentials credentials = GoogleCredentials.fromStream(resource.getInputStream());
-        String projectId = "webpro-425010";
+        String projectId = "glass-sight-427116-t8";
 
         return StorageOptions.newBuilder()
                 .setCredentials(credentials)
