@@ -4,11 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import knulions.mealog.domain.Image.service.ImageService;
-import knulions.mealog.domain.board.dto.request.BoardSaveRequest;
-import knulions.mealog.domain.board.dto.request.BoardUpdateRequest;
-import knulions.mealog.domain.board.dto.response.BoardAllReadResponse;
-import knulions.mealog.domain.board.dto.response.BoardIdReadResponse;
-import knulions.mealog.domain.board.service.BoardService;
 import knulions.mealog.domain.market.dto.request.MarketSaveRequest;
 import knulions.mealog.domain.market.dto.request.MarketUpdateRequest;
 import knulions.mealog.domain.market.dto.response.MarketAllReadResponse;
@@ -87,27 +82,27 @@ public class MarketController {
         return ResponseEntity.ok().body(ApiUtil.success(HttpStatus.OK, marketAllReadResponse));
     }
 
-//    @PutMapping("/{marketId}")
-//    @PreAuthorize("isAuthenticated()")
-//    @Operation(summary = "마켓 수정", description = "특정 마켓을 수정하는 로직")
-//    public ResponseEntity<ApiUtil.ApiSuccessResult<Long>> updateMarket(
-//            @RequestPart(value="MarketUpdateRequest") MarketUpdateRequest marketUpdateRequest,
-//            @RequestPart(value = "images", required = false) MultipartFile[] images,
-//            @PathVariable("marketId") Long marketId,
-//            @AuthenticationPrincipal PrincipalDetails principalDetails
-//    )throws IOException{
-//        Long updateId = marketService.updateMarket(marketUpdateRequest, images, boardId, principalDetails.getEmail());
-//        return ResponseEntity.ok().body(ApiUtil.success(HttpStatus.OK, updateId));
-//    }
+    @PutMapping("/{marketId}")
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "마켓 수정", description = "특정 마켓을 수정하는 로직")
+    public ResponseEntity<ApiUtil.ApiSuccessResult<Long>> updateMarket(
+            @RequestPart(value="MarketUpdateRequest") MarketUpdateRequest marketUpdateRequest,
+            @RequestPart(value = "images", required = false) MultipartFile[] images,
+            @PathVariable("marketId") Long marketId,
+            @AuthenticationPrincipal PrincipalDetails principalDetails
+    )throws IOException{
+        Long updateId = marketService.updateMarket(marketUpdateRequest, images, marketId, principalDetails.getEmail());
+        return ResponseEntity.ok().body(ApiUtil.success(HttpStatus.OK, updateId));
+    }
 
-//    @DeleteMapping("/{marketId}")
-//    @PreAuthorize("isAuthenticated()")
-//    @Operation(summary = "마켓 삭제", description = "특정 마켓을 삭제하는 로직")
-//    public ResponseEntity<ApiUtil.ApiSuccessResult<?>> deleteMarket(
-//            @PathVariable("marketId") Long marketId,
-//            @AuthenticationPrincipal PrincipalDetails principalDetails)throws IOException{
-//        marketService.deleteMarket(marketId, principalDetails.getEmail());
-//        return ResponseEntity.ok().body(ApiUtil.success(HttpStatus.OK));
-//    }
+    @DeleteMapping("/{marketId}")
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "마켓 삭제", description = "특정 마켓을 삭제하는 로직")
+    public ResponseEntity<ApiUtil.ApiSuccessResult<?>> deleteMarket(
+            @PathVariable("marketId") Long marketId,
+            @AuthenticationPrincipal PrincipalDetails principalDetails)throws IOException{
+        marketService.deleteMarket(marketId, principalDetails.getEmail());
+        return ResponseEntity.ok().body(ApiUtil.success(HttpStatus.OK));
+    }
 
 }

@@ -69,7 +69,7 @@ public class BoardController {
 
     @GetMapping("/mine")
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "내가 쓴 모든 프로그램 조회", description = "내가 쓴 모든 프로그램 조회")
+    @Operation(summary = "내가 쓴 모든 게시글 조회", description = "내가 쓴 모든 게시글 조회")
     public ResponseEntity<ApiUtil.ApiSuccessResult<List<BoardAllReadResponse>>> getMyPrograms(
             @AuthenticationPrincipal PrincipalDetails principalDetails
     )throws IOException{
@@ -79,7 +79,7 @@ public class BoardController {
 
 
     @GetMapping("/view/boards")
-    @Operation(summary = "개최가자 연 모든 프로그램 조회", description = "내가 쓴 모든 프로그램 조회")
+    @Operation(summary = "글쓴이가 쓴 게시글 조회", description = "글쓴이가 쓴 게시글 조회")
     public ResponseEntity<ApiUtil.ApiSuccessResult<List<BoardAllReadResponse>>> getHeldPrograms(
             @RequestParam(name = "email") String email) throws IOException {
         log.info("email {} 들어옴", email);
@@ -109,7 +109,5 @@ public class BoardController {
         boardService.deleteBoard(boardId, principalDetails.getEmail());
         return ResponseEntity.ok().body(ApiUtil.success(HttpStatus.OK));
     }
-
-
 
 }

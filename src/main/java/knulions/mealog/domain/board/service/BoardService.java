@@ -124,7 +124,6 @@ public class BoardService {
             }
             return responseList;
         }catch(Exception e){
-            log.info("findAllMyPrograms 오류,{}",e);
         }
         return null;
     }
@@ -134,11 +133,11 @@ public class BoardService {
     public Long updateBoard(BoardUpdateRequest boardUpdateRequest, MultipartFile[] newImageList, Long boardId, String email)throws IOException{
 
         Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new NoSuchElementException("program이 없습니다"));
+                .orElseThrow(() -> new NoSuchElementException("board이 없습니다"));
 
         //Member member = memberRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("member 이 없습니다"));
         if(!board.getMember().getEmail().equals(email)){
-            throw new AccessDeniedException("program을 수정할 권한이 없습니다.");
+            throw new AccessDeniedException("board을 수정할 권한이 없습니다.");
         }
 
         imageRepository.deleteAllByBoardId(boardId);

@@ -123,7 +123,6 @@ public class MarketService{
             }
             return responseList;
         }catch(Exception e){
-            log.info("findAllMyPrograms 오류,{}",e);
         }
         return null;
     }
@@ -159,7 +158,7 @@ public class MarketService{
                 .orElseThrow(() -> new NoSuchElementException("market이 없습니다."));
 
         if(!market.getMember().getEmail().equals(email)){
-            throw new AccessDeniedException("program을 삭제할 권한이 없습니다.");
+            throw new AccessDeniedException("market 을 삭제할 권한이 없습니다.");
         }
 
 
